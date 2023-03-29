@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { url } from "../../helper/helper.js";
 
 export default function add() {
 	const [name, setName] = useState("");
@@ -9,7 +10,28 @@ export default function add() {
 	const [duration, setDuration] = useState("");
 	const { push } = useRouter();
 
-	const handleSubmit = () => {};
+	//Hitting submit and connecting to the backend and sending the data
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const data = { name, numberOfSeats, description, instructor, duration };
+		const JSONdata = JSON.stringify(data);
+		const options = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				auth: "admin",
+			},
+			body: JSONdata,
+		};
+		try {
+			const response = await fetch(url, options);
+			const result = await response.json();
+			alert("Course Added Successfully");
+			push("/course");
+		} catch (e) {
+			alert("something went wrong!");
+		}
+	};
 
 	return (
 		<div>
@@ -20,7 +42,7 @@ export default function add() {
 			<div className="m-3 py-5 bg-secondary">
 				<form className="m-3">
 					<div className="mb-3">
-						<label className="form-label text-white">Name:</label>
+						<label className="form-label text-white">Course Name:</label>
 						<input
 							type="text"
 							className="form-control"
@@ -29,7 +51,9 @@ export default function add() {
 						/>
 					</div>
 					<div className="mb-3">
-						<label className="form-label text-white">description:</label>
+						<label className="form-label text-white">
+							Description of the Course:
+						</label>
 						<input
 							type="text"
 							className="form-control"
@@ -38,7 +62,7 @@ export default function add() {
 						/>
 					</div>
 					<div className="mb-3">
-						<label className="form-label text-white">instructor:</label>
+						<label className="form-label text-white">Instructor Name:</label>
 						<input
 							type="text"
 							className="form-control"
@@ -47,7 +71,9 @@ export default function add() {
 						/>
 					</div>
 					<div className="mb-3">
-						<label className="form-label text-white">duration:</label>
+						<label className="form-label text-white">
+							Duration of the Course:
+						</label>
 						<input
 							type="text"
 							className="form-control"
