@@ -40,6 +40,15 @@ export default function add() {
 			</div>
 
 			<div className="m-3 py-5 bg-secondary">
+				<div className="mx-3">
+					<button
+						type="submit"
+						className="btn btn-danger"
+						onClick={() => push("/course")}
+					>
+						Go back
+					</button>
+				</div>
 				<form className="m-3">
 					<div className="mb-3">
 						<label className="form-label text-white">Course Name:</label>
@@ -98,15 +107,6 @@ export default function add() {
 						Submit
 					</button>
 				</form>
-				<div className="mx-3">
-					<button
-						type="submit"
-						className="btn btn-danger"
-						onClick={() => push("/course")}
-					>
-						Go back
-					</button>
-				</div>
 			</div>
 		</div>
 	);

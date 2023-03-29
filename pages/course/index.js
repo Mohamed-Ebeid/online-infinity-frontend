@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { url } from "../../helper/helper.js";
 import Link from "next/link";
 
+//Fetching all courses
 export async function getServerSideProps() {
 	const res = await fetch(url);
 	const data = await res.json();
@@ -16,14 +17,30 @@ export async function getServerSideProps() {
 
 export default function index({ courses }) {
 	const { push } = useRouter();
+	//authentication
 	useEffect(() => {
 		if (localStorage.getItem("user") !== "admin") {
 			push("/");
 		}
 	}, []);
 
-	const handleAdd = () => {
-		push("/");
+	//Deleting
+	const handleDelete = async (props) => {
+		const options = {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+				auth: "admin",
+			},
+		};
+		try {
+			const response = await fetch(`${url}/delete/${props}`, options);
+			await response.json();
+			alert("Course Deleted Successfully!");
+			push("/course");
+		} catch (e) {
+			alert("something went wrong!");
+		}
 	};
 
 	return (
@@ -35,22 +52,33 @@ export default function index({ courses }) {
 				<table className="table">
 					<thead>
 						<tr>
-							<th scope="col">Name</th>
-							<th scope="col">Instructor</th>
-							<th scope="col">Action</th>
+							<th scope="col" className="text-center">
+								Name
+							</th>
+							<th scope="col" className="text-center">
+								Instructor
+							</th>
+							<th scope="col" className="text-center">
+								Action
+							</th>
 						</tr>
 					</thead>
 					{courses?.map((c) => (
 						<tbody key={c._id}>
 							<tr>
-								<td>
+								<td className="text-center">
 									<Link href={"/course/" + c._id}>{c.name}</Link>
 								</td>
-								<td>{c.instructor}</td>
-								<td>
+								<td className="text-center">{c.instructor}</td>
+								<td className="text-center">
 									<Link href={"/"}>Edit</Link>
 									<span> or </span>
-									<Link href={"/"}>Delete</Link>
+									<button
+										className="btn btn-danger"
+										onClick={() => handleDelete(c._id)}
+									>
+										Delete
+									</button>
 								</td>
 							</tr>
 						</tbody>
