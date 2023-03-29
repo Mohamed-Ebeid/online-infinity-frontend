@@ -26,20 +26,25 @@ export default function index({ courses }) {
 
 	//Deleting
 	const handleDelete = async (props) => {
-		const options = {
-			method: "DELETE",
-			headers: {
-				"Content-Type": "application/json",
-				auth: "admin",
-			},
-		};
-		try {
-			const response = await fetch(`${url}/delete/${props}`, options);
-			await response.json();
-			alert("Course Deleted Successfully!");
-			push("/course");
-		} catch (e) {
-			alert("something went wrong!");
+		console.log(props);
+		if (confirm(`Are you sure you want to delete ${props[1]}?`)) {
+			const options = {
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+					auth: "admin",
+				},
+			};
+			try {
+				const response = await fetch(`${url}/delete/${props[0]}`, options);
+				await response.json();
+				alert("Course Deleted Successfully!");
+				push("/course");
+			} catch (e) {
+				alert("something went wrong!");
+			}
+		} else {
+			return;
 		}
 	};
 
@@ -75,7 +80,7 @@ export default function index({ courses }) {
 									<span> or </span>
 									<button
 										className="btn btn-danger"
-										onClick={() => handleDelete(c._id)}
+										onClick={() => handleDelete([c._id, c.name])}
 									>
 										Delete
 									</button>
