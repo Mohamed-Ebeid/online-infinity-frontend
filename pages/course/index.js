@@ -26,7 +26,7 @@ export default function index({ courses }) {
 
 	//Deleting
 	const handleDelete = async (props) => {
-		console.log(props);
+		// console.log(props);
 		if (confirm(`Are you sure you want to delete ${props[1]}?`)) {
 			const options = {
 				method: "DELETE",
@@ -46,6 +46,11 @@ export default function index({ courses }) {
 		} else {
 			return;
 		}
+	};
+
+	const handleLogout = () => {
+		localStorage.removeItem("user");
+		push("/");
 	};
 
 	return (
@@ -93,6 +98,9 @@ export default function index({ courses }) {
 			<div className="text-center">
 				<button className="btn btn-primary" onClick={() => push("/course/add")}>
 					Add a new course
+				</button>
+				<button className="btn btn-danger mx-3" onClick={() => handleLogout()}>
+					Log Out
 				</button>
 			</div>
 		</div>

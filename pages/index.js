@@ -62,7 +62,7 @@ export default function Home() {
             <button
               type="submit"
               className="btn btn-primary"
-              onClick={() => handleSubmit()}
+              onClick={handleSubmit}
             >
               Submit
             </button>
