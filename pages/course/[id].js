@@ -15,10 +15,39 @@ export async function getServerSideProps(context) {
 }
 
 export default function Details({ course }) {
+	const { push } = useRouter();
 	return (
-		<div>
+		<div className="text-center bg-light pt-3">
 			<h1>Course Details</h1>
-			<p>{course?.name}</p>
+			<div className="pb-3 ">
+				<label className="form-label px-1 fw-bolder">Course's Name: </label>
+				<p className="fw-semibold"> {course.name}</p>
+			</div>
+			<div className="pb-3 ">
+				<label className="form-label px-1 fw-bolder">
+					Course's description:{" "}
+				</label>
+				<p className="fw-semibold"> {course.description}</p>
+			</div>
+			<div className="pb-3 ">
+				<label className="form-label px-1 fw-bolder">
+					Course's instructor:{" "}
+				</label>
+				<p className="fw-semibold"> {course.instructor}</p>
+			</div>
+			<div className="pb-3 ">
+				<label className="form-label px-1 fw-bolder">Course's duration: </label>
+				<p className="fw-semibold"> {course.duration}</p>
+			</div>
+			<div className="pb-3 ">
+				<label className="form-label px-1 fw-bolder">
+					Course's number Of Seats:{" "}
+				</label>
+				<p className="fw-semibold"> {course.numberOfSeats}</p>
+			</div>
+			<button className="btn btn-danger" onClick={() => push("/course")}>
+				Go Back
+			</button>
 		</div>
 	);
 }

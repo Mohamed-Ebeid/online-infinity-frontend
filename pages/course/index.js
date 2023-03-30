@@ -5,14 +5,18 @@ import Link from "next/link";
 
 //Fetching all courses
 export async function getServerSideProps() {
-	const res = await fetch(url);
-	const data = await res.json();
+	try {
+		const res = await fetch(url);
+		const data = await res.json();
 
-	return {
-		props: {
-			courses: data,
-		},
-	};
+		return {
+			props: {
+				courses: data,
+			},
+		};
+	} catch {
+		return { props: {} };
+	}
 }
 
 export default function index({ courses }) {
@@ -21,6 +25,9 @@ export default function index({ courses }) {
 	useEffect(() => {
 		if (localStorage.getItem("user") !== "admin") {
 			push("/");
+		}
+		if (!courses) {
+			alert("Could not connect to the backend!");
 		}
 	}, []);
 
