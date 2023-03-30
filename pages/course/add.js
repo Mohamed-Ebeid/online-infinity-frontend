@@ -30,6 +30,7 @@ export default function add() {
 			push("/course");
 		} catch (e) {
 			alert("something went wrong!");
+			push("/course");
 		}
 	};
 

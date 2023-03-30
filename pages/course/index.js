@@ -88,7 +88,7 @@ export default function index({ courses }) {
 								</td>
 								<td className="text-center">{c.instructor}</td>
 								<td className="text-center">
-									<Link href={"/"}>Edit</Link>
+									<Link href={"/course/edit?id=" + c._id}>Edit</Link>
 									<span> or </span>
 									<button
 										className="btn btn-danger"

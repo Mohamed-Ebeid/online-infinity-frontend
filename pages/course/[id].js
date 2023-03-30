@@ -45,7 +45,7 @@ export default function Details({ course }) {
 				</label>
 				<p className="fw-semibold"> {course.numberOfSeats}</p>
 			</div>
-			<button className="btn btn-danger" onClick={() => push("/course")}>
+			<button className="btn btn-danger mb-5" onClick={() => push("/course")}>
 				Go Back
 			</button>
 		</div>
