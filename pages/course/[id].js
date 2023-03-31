@@ -18,7 +18,7 @@ export default function Details({ course }) {
 	const { push } = useRouter();
 	return (
 		<div className="text-center bg-light">
-			<h1 className="bg-primary py-3">Course Details</h1>
+			<h1 className="bg-primary py-3 text-white">Course Details</h1>
 			<div className="pb-3 ">
 				<label className="form-label px-1 fw-bolder">Course's Name: </label>
 				<p className="fw-semibold"> {course.name}</p>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { url } from "../../helper/helper.js";
-import { getCookie } from "cookies-next";
 
 //Fetching a single course
 export async function getServerSideProps(context) {
@@ -54,13 +53,14 @@ export default function edit({ course }) {
 			.then((response) => console.log(response))
 			.catch((err) => console.error(err));
 		alert("Course Updated Successfully!");
-		push("/course");
 	};
 	return (
 		<>
 			{
 				<div>
-					<h1 className="text-center pt-3">Edit a Course:</h1>
+					<h1 className="text-center mb-0 py-3 bg-primary text-white">
+						Edit a Course:
+					</h1>
 					<div className=" py-5 bg-secondary">
 						<div className="mx-3">
 							<button

@@ -36,11 +36,11 @@ export default function add() {
 
 	return (
 		<div>
-			<div className="d-flex justify-content-center bg-primary">
-				<h1 className="mt-3 pb-1">Add a Course:</h1>
+			<div className="d-flex justify-content-center bg-primary mb-0">
+				<h1 className="mt-3 pb-1 text-white">Add a Course:</h1>
 			</div>
 
-			<div className="m-3 py-5 bg-secondary">
+			<div className="py-3 bg-secondary">
 				<div className="mx-3">
 					<button
 						type="submit"

@@ -36,7 +36,9 @@ export default function Home() {
       </Head>
       <main className="mb-3">
         <div className="d-flex justify-content-center bg-primary">
-          <h1 className="mt-3 pb-1">Welcome to the course assigment</h1>
+          <h1 className="mt-3 pb-1 px-1 text-white">
+            Welcome to the Course Assigment
+          </h1>
         </div>
 
         <div className="m-3 py-5">

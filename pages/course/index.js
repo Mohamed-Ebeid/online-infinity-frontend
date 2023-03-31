@@ -56,8 +56,12 @@ export default function index({ courses, req, res }) {
 	};
 
 	const handleLogout = () => {
-		localStorage.removeItem("user");
-		push("/");
+		if (confirm("Are you sure you want to logout?")) {
+			localStorage.removeItem("user");
+			push("/");
+		} else {
+			return;
+		}
 	};
 
 	const handleEdit = (id) => {
@@ -66,10 +70,8 @@ export default function index({ courses, req, res }) {
 	};
 
 	return (
-		<div className="mt-3 mx-1">
-			<h1 className="text-center mb-3 bg-primary text-white p-1">
-				All Courses
-			</h1>
+		<div>
+			<h1 className="text-center py-3 bg-primary text-white">All Courses</h1>
 			<div className="pt-3 bg-light">
 				<table className="table">
 					<thead>
