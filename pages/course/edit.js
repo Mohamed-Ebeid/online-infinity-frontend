@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { url } from "../../helper/helper.js";
+import { getCookie } from "cookies-next";
 
 //Fetching a single course
 export async function getServerSideProps(context) {
@@ -31,9 +32,15 @@ export default function edit({ course }) {
 	const [duration, setDuration] = useState(course?.duration);
 	const { push } = useRouter();
 
+	useEffect(() => {
+		if (course === null) {
+			push("/course");
+		}
+	}, []);
+
 	const handleSubmit = async () => {
-		const data = { name, numberOfSeats, description, instructor, duration };
-		const JSONdata = JSON.stringify(data);
+		const data = { name, description, instructor, duration, numberOfSeats };
+		const JSONdata = await JSON.stringify(data);
 		const options = {
 			method: "PUT",
 			headers: {
@@ -42,19 +49,16 @@ export default function edit({ course }) {
 			},
 			body: JSONdata,
 		};
-		try {
-			const response = await fetch(`${url}/add/${course._id}`, options);
-			await response.json();
-			alert("Course Updated Successfully!");
-			push("/course");
-		} catch (e) {
-			alert("something went wrong!");
-			push("/course/" + course._id);
-		}
+		fetch(`${url}/add/${course._id}`, options)
+			.then((response) => response.json())
+			.then((response) => console.log(response))
+			.catch((err) => console.error(err));
+		alert("Course Updated Successfully!");
+		push("/course");
 	};
 	return (
 		<>
-			{course?.name ? (
+			{
 				<div>
 					<h1 className="text-center pt-3">Edit a Course:</h1>
 					<div className=" py-5 bg-secondary">
@@ -136,17 +140,7 @@ export default function edit({ course }) {
 						</form>
 					</div>
 				</div>
-			) : (
-				<div className="text-center bg-light py-5">
-					<h1>No Courses were found</h1>
-					<button
-						className="btn btn-danger mt-3"
-						onClick={() => push("/course")}
-					>
-						Go Back
-					</button>
-				</div>
-			)}
+			}
 		</>
 	);
 }

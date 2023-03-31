@@ -19,7 +19,7 @@ export async function getServerSideProps() {
 	}
 }
 
-export default function index({ courses }) {
+export default function index({ courses, req, res }) {
 	const { push } = useRouter();
 	//authentication
 	useEffect(() => {
@@ -60,6 +60,11 @@ export default function index({ courses }) {
 		push("/");
 	};
 
+	const handleEdit = (id) => {
+		push("/course/edit?id=" + id);
+		//push("/course/edit");
+	};
+
 	return (
 		<div className="mt-3 mx-1">
 			<h1 className="text-center mb-3 bg-primary text-white p-1">
@@ -88,8 +93,12 @@ export default function index({ courses }) {
 								</td>
 								<td className="text-center">{c.instructor}</td>
 								<td className="text-center">
-									<Link href={"/course/edit?id=" + c._id}>Edit</Link>
-									<span> or </span>
+									<button
+										className="btn btn-primary mx-1"
+										onClick={() => handleEdit(c._id)}
+									>
+										Edit
+									</button>
 									<button
 										className="btn btn-danger"
 										onClick={() => handleDelete([c._id, c.name])}

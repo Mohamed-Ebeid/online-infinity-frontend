@@ -17,8 +17,8 @@ export async function getServerSideProps(context) {
 export default function Details({ course }) {
 	const { push } = useRouter();
 	return (
-		<div className="text-center bg-light pt-3">
-			<h1>Course Details</h1>
+		<div className="text-center bg-light">
+			<h1 className="bg-primary py-3">Course Details</h1>
 			<div className="pb-3 ">
 				<label className="form-label px-1 fw-bolder">Course's Name: </label>
 				<p className="fw-semibold"> {course.name}</p>
@@ -27,7 +27,7 @@ export default function Details({ course }) {
 				<label className="form-label px-1 fw-bolder">
 					Course's description:{" "}
 				</label>
-				<p className="fw-semibold"> {course.description}</p>
+				<p className="fw-semibold px-1"> {course.description}</p>
 			</div>
 			<div className="pb-3 ">
 				<label className="form-label px-1 fw-bolder">

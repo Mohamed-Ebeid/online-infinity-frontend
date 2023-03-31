@@ -1,1 +1,1 @@
-export const url = "http://localhost:5000/api/course";
+export const url = "https://online-infinity-backend.vercel.app/api/course";
